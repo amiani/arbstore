@@ -10,9 +10,11 @@ const server = express();
 server.use('/static', express.static('static'));
 
 server.get('/', (req, res) => {
+  const initialState = { isMobile: true };
   res.send(template({
-    body: renderToString(<App isMobile={true} />),
-    title: 'Test'
+    body: renderToString(<App {...initialState} />),
+    title: 'Test',
+    initialState: JSON.stringify(initialState)
   }));
 });
 
