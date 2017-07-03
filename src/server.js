@@ -1,29 +1,56 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import { Product } from './app/schema';
+import { Product } from './schema';
 import React from 'react';
+import { StaticRouter } from 'react-router';
 import { renderToString } from 'react-dom/server';
 import template from './template';
 import path from 'path';
-import App from './app/index';
+import App from './components/App';
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/arbstore', { useMongoClient: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
-const testprod = new Product({ name: 'barbar' });
 const server = express();
 
 server.use('/static', express.static('static'));
 
-server.get('/', (req, res) => {
+server.use((req, res, next) => {
   const initialState = { isMobile: true };
+  const context = {};
   res.send(template({
-    body: renderToString(<App {...initialState} />),
+    body: renderToString(
+      <StaticRouter
+        location={req.url}
+        context={context}
+      >
+        <App {...initialState} />
+      </StaticRouter>
+    ),
     title: 'Test',
     initialState: JSON.stringify(initialState)
   }));
 });
+
+
+/*server.get('/', (req, res) => {
+  const initialState = { isMobile: true };
+  const context = {};
+
+  res.send(template({
+    body: renderToString(
+      <StaticRouter
+        location={req.url}
+        context={context}
+      >
+        <App {...initialState} />
+      </StaticRouter>
+    ),
+    title: 'Test',
+    initialState: JSON.stringify(initialState)
+  }));
+});*/
 
 server.listen(8080);

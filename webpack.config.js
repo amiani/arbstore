@@ -27,7 +27,7 @@ const config = [
     },
   },
   {
-    entry: './src/app/browser.js',
+    entry: './src/browser.js',
     output: {
       path: path.join(__dirname, 'dist/static'),
       publicPath: '/static/',
