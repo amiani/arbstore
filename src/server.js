@@ -34,23 +34,4 @@ server.use((req, res, next) => {
   }));
 });
 
-
-/*server.get('/', (req, res) => {
-  const initialState = { isMobile: true };
-  const context = {};
-
-  res.send(template({
-    body: renderToString(
-      <StaticRouter
-        location={req.url}
-        context={context}
-      >
-        <App {...initialState} />
-      </StaticRouter>
-    ),
-    title: 'Test',
-    initialState: JSON.stringify(initialState)
-  }));
-});*/
-
 server.listen(8080);
