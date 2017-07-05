@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductList from '../ProductList/productlist.js';
+import ProductList from '../ProductList/productlist';
 
 export default class StorePage extends React.Component {
   constructor(props) {

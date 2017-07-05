@@ -1,0 +1,14 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import CartButton from '../CartButton/cartbutton';
+
+const Header = props => (
+  <ul>
+    <li><h1>{ props.storename }</h1></li>
+    <li><Link to="/about">About</Link></li>
+    <li><Link to="/contact">Contact</Link></li>
+    <li><CartButton /></li>
+  </ul>
+);
+
+export default Header;

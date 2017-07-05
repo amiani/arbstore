@@ -1,8 +1,21 @@
 import React from 'react';
+import ProductDetails from '../ProductDetails/productdetails';
 
-const ProductList = props => (
-  <ul>
-  </ul>
-);
+export default class ProductList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: null
+    };
+  }
 
-export default ProductList;
+  render() {
+    return (
+      <div>
+        <ul>
+        </ul>
+        <ProductDetails product={this.state.selected} />
+      </div>
+    );
+  }
+}

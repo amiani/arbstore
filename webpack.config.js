@@ -22,6 +22,14 @@ const config = [
         {
           test: /\.json$/,
           loader: 'json-loader'
+        },
+        {
+          test: /\.css$/,
+          exclude: '/node_modules',
+          use: [
+            'style-loader',
+            'css-loader'
+          ]
         }
       ]
     },
@@ -34,11 +42,21 @@ const config = [
       filename: 'bundle.js'
     },
     module: {
-      rules: [{
-        test: /\.js$/,
-        exclude: '/node_modules',
-        loader: 'babel-loader'
-      }]
+      rules: [
+        {
+          test: /\.js$/,
+          exclude: '/node_modules',
+          loader: 'babel-loader'
+        },
+        {
+          test: /\.css$/,
+          exclude: '/node_modules',
+          use : [
+            'style-loader',
+            'css-loader'
+          ]
+        }
+      ]
     },
   }
 ];

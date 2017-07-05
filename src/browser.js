@@ -5,6 +5,7 @@ import App from './components/App';
 
 ReactDOM.render(
   <BrowserRouter>
-    <App {...window.__APP_INITIAL_STATE__} />, document.getElementById('app'));
-  </BrowserRouter>
+    <App {...window.__APP_INITIAL_STATE__} />
+  </BrowserRouter>,
+  document.getElementById('app')
 );

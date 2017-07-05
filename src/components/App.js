@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route } from 'react-router';
 import { Link } from 'react-router-dom';
-import Menubar from './Menubar/menubar';
-import StorePage from './StorePage/storepage.js';
+import Header from './Header/header';
+import StorePage from './StorePage/storepage';
 
 const App = props => (
   <div>
-    <Menubar storename="Watcharb" />
+    <Header storename="Watcharb" />
     <Link to="/store">Store</Link>
     <Route path="/store" component={StorePage} />
   </div>
