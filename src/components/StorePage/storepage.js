@@ -4,8 +4,9 @@ import ProductList from '../ProductList/productlist';
 export default class StorePage extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
-      products: [],
+      products: this.props.route.products
     };
   }
 

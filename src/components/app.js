@@ -8,7 +8,8 @@ const App = props => (
   <div>
     <Header storename="Watcharb" />
     <Link to="/store">Store</Link>
-    <Route path="/store" component={StorePage} />
+    ///maybe router is not appropriate for this??
+    <Route path="/store" component={StorePage} products={props.products} />
   </div>
 );
 export default App;
