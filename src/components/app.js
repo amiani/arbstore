@@ -7,9 +7,9 @@ import StorePage from './StorePage/storepage';
 const App = props => (
   <div>
     <Header storename="Watcharb" />
-    <Link to="/store">Store</Link>
-    ///maybe router is not appropriate for this??
-    <Route path="/store" component={StorePage} products={props.products} />
+    {/*maybe router is not appropriate for this??*/}
+    {/*props undefined below*/}
+    <Route path="/store" render={routerprops => <StorePage {...routerprops} products={props.products} />} />
   </div>
 );
 export default App;

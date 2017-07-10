@@ -7,6 +7,7 @@ const Header = props => (
   <header>
     <ul>
       <li><h1>{ props.storename }</h1></li>
+      <li><Link to="/store">Store</Link></li>
       <li><Link to="/about">About</Link></li>
       <li><Link to="/contact">Contact</Link></li>
       <li><CartButton /></li>

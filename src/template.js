@@ -3,6 +3,7 @@ export default ({ body, title, initialState }) => `
   <html>
     <head>
       <title>${title}</title>
+      <link rel='stylesheet' href='static/styles.css' type='text/css' />
     </head>
 
     <body>

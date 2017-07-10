@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = [
   {
@@ -16,7 +17,6 @@ const config = [
       rules: [
         {
           test: /\.js$/,
-          exclude: /node_modules/,
           use: 'babel-loader'
         },
         {
@@ -25,14 +25,16 @@ const config = [
         },
         {
           test: /\.css$/,
-          exclude: '/node_modules',
-          use: [
-            'style-loader',
-            'css-loader'
-          ]
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: 'css-loader'
+          })
         }
       ]
     },
+    plugins: [
+      new ExtractTextPlugin('styles.css'),
+    ]
   },
   {
     entry: './src/browser.js',
@@ -50,14 +52,16 @@ const config = [
         },
         {
           test: /\.css$/,
-          exclude: '/node_modules',
-          use : [
-            'style-loader',
-            'css-loader'
-          ]
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: 'css-loader'
+          })
         }
       ]
     },
+    plugins: [
+      new ExtractTextPlugin('styles.css'),
+    ]
   }
 ];
 

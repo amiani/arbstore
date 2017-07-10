@@ -6,7 +6,7 @@ import { StaticRouter } from 'react-router';
 import { renderToString } from 'react-dom/server';
 import template from './template';
 import path from 'path';
-import App from './components/App';
+import App from './components/app';
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/arbstore', { useMongoClient: true });
@@ -18,20 +18,22 @@ const server = express();
 server.use('/static', express.static('static'));
 
 server.use((req, res, next) => {
-  const initialState = { isMobile: true };
-  const context = {};
-  res.send(template({
-    body: renderToString(
-      <StaticRouter
-        location={req.url}
-        context={context}
-      >
-        <App {...initialState} />
-      </StaticRouter>
-    ),
-    title: 'Test',
-    initialState: JSON.stringify(initialState)
-  }));
+  Product.find().then(docs => {
+    const initialState = { products: docs };
+    const context = {};
+    res.send(template({
+      body: renderToString(
+        <StaticRouter
+          location={req.url}
+          context={context}
+        >
+          <App {...initialState} />
+        </StaticRouter>
+      ),
+      title: 'Test',
+      initialState: JSON.stringify(initialState)
+    }));
+  });
 });
 
 server.listen(8080);
