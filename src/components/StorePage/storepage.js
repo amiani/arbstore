@@ -4,9 +4,7 @@ import ProductList from '../ProductList/productlist';
 export default class StorePage extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
     this.state = {
-      products: this.props.route.products
     };
   }
 
@@ -14,7 +12,7 @@ export default class StorePage extends React.Component {
     return (
       <div>
         <p>StorePage!</p>
-        <ProductList products={this.state.products} />
+        <ProductList products='' />
       </div>
     );
   }
