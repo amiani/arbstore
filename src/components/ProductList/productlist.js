@@ -1,9 +1,12 @@
 import React from 'react';
-import ProductDetails from '../ProductDetails/productdetails';
+import './productlist.scss';
+import ProductListItem from '../ProductListItem/productlistitem';
+import PropTypes from 'prop-types';
 
 export default class ProductList extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props.productsdata[0].image.data);
     this.state = {
       selected: null
     };
@@ -11,11 +14,15 @@ export default class ProductList extends React.Component {
 
   render() {
     return (
-      <div>
-        <ul>
-        </ul>
-        <ProductDetails product={this.state.selected} />
-      </div>
+      <ul className='product_list'>
+        {this.props.productsdata.map((productdata, i) => (
+          <li key={i}><ProductListItem productdata={productdata} /></li>
+        ))}
+      </ul>
     );
   }
 }
+
+ProductList.propTypes = {
+  productsdata: PropTypes.array
+};

@@ -24,12 +24,12 @@ const config = [
           loader: 'json-loader'
         },
         {
-          test: /\.css$/,
+          test: /\.css$|\.scss$/,
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
-            use: 'css-loader'
+            use: [{ loader: 'css-loader' }, { loader: 'sass-loader' }]
           })
-        }
+        },
       ]
     },
     plugins: [
@@ -51,10 +51,10 @@ const config = [
           loader: 'babel-loader'
         },
         {
-          test: /\.css$/,
+          test: /\.css$|\.scss$/,
           use: ExtractTextPlugin.extract({
             fallback: 'style-loader',
-            use: 'css-loader'
+            use: ['css-loader', 'sass-loader']
           })
         }
       ]

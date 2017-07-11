@@ -19,7 +19,7 @@ server.use('/static', express.static('static'));
 
 server.use((req, res, next) => {
   Product.find().then(docs => {
-    const initialState = { products: docs };
+    const initialState = { productsdata: docs };
     const context = {};
     res.send(template({
       body: renderToString(

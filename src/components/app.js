@@ -7,9 +7,7 @@ import StorePage from './StorePage/storepage';
 const App = props => (
   <div>
     <Header storename="Watcharb" />
-    {/*maybe router is not appropriate for this??*/}
-    {/*props undefined below*/}
-    <Route path="/store" render={routerprops => <StorePage {...routerprops} products={props.products} />} />
+    <Route path="/store" render={routerprops => <StorePage {...routerprops} productsdata={props.productsdata} />} />
   </div>
 );
 export default App;
