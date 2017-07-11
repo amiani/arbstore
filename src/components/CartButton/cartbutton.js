@@ -1,4 +1,4 @@
 import React from 'react';
 
-const CartButton = props => <>[CartButton!]</p>;
+const CartButton = props => <p>[CartButton!]</p>;
 export default CartButton;
