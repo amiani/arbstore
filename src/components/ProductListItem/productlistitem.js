@@ -1,13 +1,16 @@
 import React from 'react';
+import './productlistitem.scss';
 
 //image not working, can't load binary data into src tag properly
 const ProductListItem = props => (
   <div className='product_box'>
-    <img src={`data:${props.productdata.image.contentType};base64,${props.productdata.image.data.toString()}`} />
+    <img className='product_image' src='/static/watchimg' />
     <div className='product_basic_info'>
-      <h4 className="product_name">{props.productdata.name}</h4>
-      <h5 className="product_price">{props.productdata.price}</h5>
-  {/*<button onClick={props.addToCart(props.productid)} />*/}
+      <h2 className="product_name">{props.productdata.name}</h2>
+      <h4 className="product_price">{props.productdata.price}</h4>
+      <button className='addtocart_button' onClick={props.addToCart(props.productdata.productid)}>
+        Add To Cart!
+      </button>
     </div>
   </div>
 );

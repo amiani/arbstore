@@ -12,10 +12,14 @@ export default class StorePage extends React.Component {
     };
   }
 
+  addToCart(productid) {
+    console.log(productid, ' added to cart');
+  }
+
   render() {
     return (
       <div className='store_page_grid'>
-        <ProductList className='product_list' productsdata={this.props.productsdata} />
+        <ProductList className='product_list' productsdata={this.props.productsdata} addToCart={this.addToCart} />
         <ProductDetails className='product_details' product={this.state.selected} />
         <Cart className="cart" cartproductsdata={[]}/>
       </div>

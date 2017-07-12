@@ -1,5 +1,24 @@
 .product_box {
-  display: flex:
+  display: flex;
+  justify-content: center;
+
+  &:hover {
+    passing: 10px;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    box-shadow:
+      -1px 1px black,
+      -2px 2px black,
+      -3px 3px black,
+  }
+
+  .product_image {
+    max-width: 180px;
+    padding: 5px;
+  }
+}
+
+.product_basic_info {
 }
 
 .product_name {
