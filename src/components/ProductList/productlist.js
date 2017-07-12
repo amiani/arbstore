@@ -6,7 +6,11 @@ import PropTypes from 'prop-types';
 const ProductList = props => (
   <ul className='product_list'>
     {props.productsdata.map((productdata, i) => (
-      <li key={i}><ProductListItem productdata={productdata} addToCart={props.addToCart} /></li>
+      <li key={i}><ProductListItem
+        productdata={productdata}
+        addToCart={props.addToCart}
+        productSelected={props.productSelected}
+      /></li>
     ))}
   </ul>
 );

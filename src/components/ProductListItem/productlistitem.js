@@ -3,7 +3,7 @@ import './productlistitem.scss';
 
 //image not working, can't load binary data into src tag properly
 const ProductListItem = props => (
-  <div className='product_box' onClick={props.productselected} >
+  <div className='product_box' onClick={props.productSelected} >
     <img className='product_image' src='/static/watchimg' />
     <div className='product_basic_info'>
       <h2 className="product_name">{props.productdata.name}</h2>
