@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import CartButton from '../CartButton/cartbutton';
 import './header.scss';
 
 const Header = props => (
@@ -13,7 +12,6 @@ const Header = props => (
         <li><Link className='nav_link' to="/contact">Contact</Link></li>
       </ul>
     </nav>
-    <CartButton className="cart_button" />
   </header>
 );
 
