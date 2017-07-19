@@ -16,8 +16,8 @@ export default class StorePage extends React.Component {
     console.log(productid, ' added to cart');
   }
 
-  productSelected(productid) {
-    console.log(productid, ' selected');
+  productSelected(productdata) {
+    this.setState({ selected: productdata });
   }
 
   render() {
@@ -27,10 +27,14 @@ export default class StorePage extends React.Component {
           className='product_list'
           productsdata={this.props.productsdata}
           addToCart={this.addToCart}
-          productSelected={this.productSelected}
+          productSelected={this.productSelected.bind(this)}
         />
-        <ProductDetails className='product_details' product={this.state.selected} />
-        <Cart className="cart" cartproductsdata={[]}/>
+        {
+          this.state.selected
+          ? <ProductDetails className='product_details' productdata={this.state.selected} />
+          : <p>Nothing to show for now</p>
+        }
+        <Cart className="cart" cartproductsdata={[]} />
       </div>
     );
   }

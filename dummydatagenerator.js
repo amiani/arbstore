@@ -11,7 +11,7 @@ for (let i = 0; i != 10; i++) {
     name: `watch#${i}`,
     price: (i + 10.4),
     description: 'this is a really cool watch, anyone in their right mind would buy it right away!',
-    imagepath: 'watchimg'
+    leadimagepath: 'watchimg'
   }).save(err => {
     if (err) {
       console.log(err);

@@ -6,11 +6,11 @@ import path from 'path';
 
 const ProductListItem = props => (
   <div className='product_box' onClick={props.productSelected}>
-    <img className='product_image' src={path.join('/static', props.productdata.imagepath)} />
+    <img className='product_image' src={path.join('/static', props.productdata.leadimagepath)} />
     <div className='product_basic_info'>
       <h2 className="product_name">{props.productdata.name}</h2>
       <h4 className="product_price">{'$' + props.productdata.price.toFixed(2)}</h4>
-      <button className='addtocart_button' onClick={props.addToCart(props.productdata.productid)}>
+      <button className='addtocart_button' onClick={() => props.addToCart(props.productdata._id)}>
         Add To Cart!
       </button>
     </div>
@@ -26,7 +26,7 @@ const ProductList = props => (
           <ProductListItem
             productdata={productdata}
             addToCart={props.addToCart}
-            productSelected={props.productSelected}
+            productSelected={() => { props.productSelected(productdata) }}
           />
         </li>
       ))

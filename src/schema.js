@@ -4,6 +4,6 @@ const productSchema = mongoose.Schema({
   name: String,
   price: Number,
   description: String,
-  imagepath: String
+  leadimagepath: String
 });
 export const Product = mongoose.model('Product', productSchema);

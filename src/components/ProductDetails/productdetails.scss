@@ -1,0 +1,14 @@
+.details_panel {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #555;
+  height: 400px;
+}
+
+.images {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.description {
+}
