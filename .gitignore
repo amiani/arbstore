@@ -2,3 +2,5 @@ node_modules
 dist
 *.swp
 *.swo
+*.vim
+package-lock.json

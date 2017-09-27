@@ -10,7 +10,7 @@ const ProductListItem = props => (
     <div className='product_basic_info'>
       <h2 className="product_name">{props.productdata.name}</h2>
       <h4 className="product_price">{'$' + props.productdata.price.toFixed(2)}</h4>
-      <button className='addtocart_button' onClick={() => props.addToCart(props.productdata._id)}>
+      <button className='addtocart_button' onClick={() => props.addToCart(props.productdata)}>
         Add To Cart!
       </button>
     </div>
@@ -31,7 +31,7 @@ const ProductList = props => (
         </li>
       ))
       : <p>No products to display</p>
-      }
+    }
   </ul>
 );
 

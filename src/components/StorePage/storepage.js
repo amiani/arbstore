@@ -8,12 +8,30 @@ export default class StorePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: null
+      selected: null,
+      //dictionary from productids to { productdata, quantity }
+      cartitems: {}
     };
   }
 
-  addToCart(productid) {
-    console.log(productid, ' added to cart');
+  addToCart(productdata) {
+    const productid = productdata._id;
+    if (!this.state.cartitems[productid]) {
+      const cartitems = { productid: { productdata, quantity: 1 } };
+      this.setState((prevState, props) => {
+        return { cartitems: Object.assign(cartitems, prevState.cartitems) };
+      });
+    }
+    else {
+      console.log('Already in cart');
+    }
+  }
+
+  removeFromCart(productdata) {
+    //TODO: write this function
+  }
+
+  incrementQuantity() {
   }
 
   productSelected(productdata) {
@@ -26,7 +44,7 @@ export default class StorePage extends React.Component {
         <ProductList
           className='product_list'
           productsdata={this.props.productsdata}
-          addToCart={this.addToCart}
+          addToCart={this.addToCart.bind(this)}
           productSelected={this.productSelected.bind(this)}
         />
         {
@@ -34,7 +52,11 @@ export default class StorePage extends React.Component {
           ? <ProductDetails className='product_details' productdata={this.state.selected} />
           : <p>Nothing to show for now</p>
         }
-        <Cart className="cart" cartproductsdata={[]} />
+        <Cart
+          className='cart'
+          cartitems={this.state.cartitems}
+          removeFromCart={this.removeFromCart.bind(this)}
+        />
       </div>
     );
   }
