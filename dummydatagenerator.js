@@ -10,8 +10,9 @@ for (let i = 0; i != 10; i++) {
   new Product({
     name: `watch#${i}`,
     price: (i + 10.4),
-    description: 'this is a really cool watch, anyone in their right mind would buy it right away!',
-    leadimagepath: 'watchimg'
+    description: i + 'this is a really cool watch, anyone in their right mind would buy it right away!',
+    leadimage: 'watchlead',
+    images: ['watch1', 'watch2', 'watch3', 'watch4', 'watch5', 'watch6']
   }).save(err => {
     if (err) {
       console.log(err);
