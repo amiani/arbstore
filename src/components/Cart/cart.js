@@ -1,43 +1,42 @@
 import React from 'react';
+import './cart.scss';
 
-//TODO: make Cart display list of CartItems populated with data, each CartItem needs a remove button to remove it from the cart, also quantity
+const CartItem = props => (
+  <div className='cartitem_box'>
+    <p className='cartitem_name'>{props.productdata.name}</p>
+    <div className='quantity'>
+      <p>{props.quantity}</p>
+      <button className='increment' onClick={() => props.incrementQuantity(props.productdata._id, 1)}>+</button>
+      <button className='decrement' onClick={() => props.incrementQuantity(props.productdata._id, -1)}>-</button>
+    </div>
+    <p className='cartitem_price'>{props.productdata.price}</p>
+    <button onClick={() => props.removeFromCart(props.productdata._id)}>Remove</button>
+  </div>
+);
 
-class CartItem extends React.Component {
-  constructor(props) {
-    super();
-    this.state = { quantity: 1 };
+const Cart = props => {
+  const cartitems = props.cartitems;
+  const cartlistitems = [];
+  if (cartitems.constructor === Object && Object.keys(cartitems).length !== 0) {
+    let i = 0;
+    for (const cartitemid in cartitems) {
+      const cartitem = cartitems[cartitemid];
+      cartlistitems.push((
+        <li key={i}>
+          <CartItem
+            productdata={cartitem.productdata}
+            quantity={cartitem.quantity}
+            removeFromCart={props.removeFromCart}
+            incrementQuantity={props.incrementQuantity}
+          />
+        </li>
+      ));
+      i++;
+    }
+    return <ul className='cart_list'>{cartlistitems}</ul>;
   }
-  
-  incrementQuantity(increment) {
-    this.setState((prevState, props) => {
-      let quantity = prevState.quantity + increment;
-      quantity = quantity >= 0 ? quantity : 0;
-      return { quantity };
-    });
-  }
-
-  render() {
-    return (
-      <div className='cartitem_box'>
-        <p className='cartitem_name'>{this.props.productdata.name}</p>
-        <p className='cartitem_price'>{this.props.productdata.price}</p>
-      </div>
-    );
+  else {
+    return <p>Nothing in cart yet</p>;
   }
 }
-
-const Cart = props => (
-  <ul className='cart_list'>
-    {() => {
-      const cartitems = props.cartitems;
-      return Object.keys(cartitems).length !== 0 && cartitems.constructor === Object
-        ? cartitems.map((productdata, i) => (
-            <li key={i}>
-              <CartItem productdata={productdata} removeFromCart={props.removeFromCart} />
-            </li>
-          ))
-        : '';
-    }}
-  </ul>
-);
 export default Cart;

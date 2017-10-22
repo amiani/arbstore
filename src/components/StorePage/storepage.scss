@@ -1,8 +1,13 @@
 .store_page_grid {
   display: grid;
-  grid-template-columns: 2fr 2fr 1fr;;
+  grid-template-columns: 1.25fr 2fr 1fr;
 
   .product_list {
+    grid-column-start: 1;
+  }
+
+  .hidelist {
+    opacity: 0;
   }
 
   .product_details {
@@ -11,6 +16,6 @@
 
   .cart {
     grid-column-start: 3;
-    border: 1px solid black;
   }
+
 }
