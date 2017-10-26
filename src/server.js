@@ -7,6 +7,7 @@ import { renderToString } from 'react-dom/server';
 import template from './template';
 import path from 'path';
 import App from './components/app';
+import stripe from 'stripe';
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/arbstore', { useMongoClient: true });

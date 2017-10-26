@@ -8,7 +8,7 @@ const ProductListItem = props => (
   <div className='product_box' onClick={props.productSelected}>
     <img className='product_image' src={path.join('/static/images', props.productdata.leadimagepath)} />
     <div className='product_basic_info'>
-      <h2 className="product_name">{props.productdata.name}</h2>
+      <h3 className="product_name">{props.productdata.name}</h3>
       <h4 className="product_price">{'$' + props.productdata.price.toFixed(2)}</h4>
       <button className='addtocart_button' onClick={() => props.addToCart(props.productdata)}>
         Add To Cart!
@@ -18,7 +18,7 @@ const ProductListItem = props => (
 );
 
 const ProductList = props => (
-  <ul className='product_list'>
+  <ul className={props.className}>
     {
       props.productsdata !== 'undefined' && props.productsdata.length > 0
       ? props.productsdata.map((productdata, i) => (

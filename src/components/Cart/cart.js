@@ -14,29 +14,43 @@ const CartItem = props => (
   </div>
 );
 
+const CheckoutButton = props => {
+  const confirmOrder = (cartitems) => {
+    //make request to server with order
+  };
+
+  return <a className='confirmbutton' onClick={() => { confirmOrder(props.cartitems) }}>Confirm Order</a>;
+};
+
 const Cart = props => {
   const cartitems = props.cartitems;
   const cartlistitems = [];
-  if (cartitems.constructor === Object && Object.keys(cartitems).length !== 0) {
-    let i = 0;
-    for (const cartitemid in cartitems) {
-      const cartitem = cartitems[cartitemid];
-      cartlistitems.push((
-        <li key={i}>
-          <CartItem
-            productdata={cartitem.productdata}
-            quantity={cartitem.quantity}
-            removeFromCart={props.removeFromCart}
-            incrementQuantity={props.incrementQuantity}
-          />
-        </li>
-      ));
-      i++;
-    }
-    return <ul className='cart_list'>{cartlistitems}</ul>;
+  let i = 0;
+  for (const cartitemid in cartitems) {
+    const cartitem = cartitems[cartitemid];
+    cartlistitems.push((
+      <li key={i}>
+        <CartItem
+          productdata={cartitem.productdata}
+          quantity={cartitem.quantity}
+          removeFromCart={props.removeFromCart}
+          incrementQuantity={props.incrementQuantity}
+        />
+      </li>
+    ));
+    i++;
   }
-  else {
-    return <p>Nothing in cart yet</p>;
-  }
+  return (
+    <div className={props.className}>
+      <ul>{cartlistitems}</ul>
+      {(() => {
+        if (props.showcheckout) {
+          return <ConfirmOrderButton cartitems={cartitems} />
+        } else if (cartlistitems.length > 0) {
+          return <a className='checkoutbutton' onClick={props.toggleCheckout}>Checkout</a>;
+        }
+      })()}
+    </div>
+  );
 }
 export default Cart;

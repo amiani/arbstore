@@ -1,8 +1,13 @@
 .cart {
   opacity: 1;
   transition: opacity .4s ease-in;
+  grid-column-start: 3;
 }
 
 .hidecart {
   opacity: 0;
+}
+
+.showcheckout {
+  grid-column: 2 / span 2;
 }
