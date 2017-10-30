@@ -11,7 +11,7 @@ export default class StorePage extends React.Component {
     this.state = {
       selected: this.props.productsdata[0],
       cartitems: {}, //dictionary from productids to { productdata, quantity }
-      showproductlist: false,
+      showproductlist: true,  //both this and showcart should be false in prod
       showcart: true,
       showcheckout: false
     };

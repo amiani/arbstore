@@ -6,7 +6,6 @@
    transition: opacity .8s ease-in;
 
    li {
-     border-bottom: 1px solid black;
    }
  }
 
@@ -15,9 +14,14 @@
   display: flex;
   justify-content: center;
   height: 150px;
+  //border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
 
   &:hover {
-    passing: 10px;
+    position: relative;
+    top: -2px;
+    left: 2px;
     border-left: 1px solid black;
     border-bottom: 1px solid black;
     box-shadow:
@@ -32,6 +36,10 @@
     height: 90%;
     margin: 3px 10px 0 0;
   }
+}
+
+.product_box_selected {
+  border-right-style: none;
 }
 
 .product_basic_info {

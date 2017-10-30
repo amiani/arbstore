@@ -1,56 +1,79 @@
 import React from 'react';
 import './cart.scss';
+import BillingShippingForm from '../BillingShippingForm/billingshippingform'
 
 const CartItem = props => (
-  <div className='cartitem_box'>
-    <p className='cartitem_name'>{props.productdata.name}</p>
+  <div className='cartitembox'>
+    <p className='cartitemname'>{props.productdata.name}</p>
+    <p className='cartitemprice'>{'$' + props.productdata.price + ' x '}</p>
     <div className='quantity'>
       <p>{props.quantity}</p>
       <button className='increment' onClick={() => props.incrementQuantity(props.productdata._id, 1)}>+</button>
-      <button className='decrement' onClick={() => props.incrementQuantity(props.productdata._id, -1)}>-</button>
+      <button className='cartitembutton decrement' onClick={() => props.incrementQuantity(props.productdata._id, -1)}>-</button>
     </div>
-    <p className='cartitem_price'>{props.productdata.price}</p>
+    <p className='total'>{props.productdata.price * props.quantity}</p>
     <button onClick={() => props.removeFromCart(props.productdata._id)}>Remove</button>
   </div>
 );
 
-const CheckoutButton = props => {
+/*
+const ConfirmOrderButton = props => {
   const confirmOrder = (cartitems) => {
     //make request to server with order
   };
 
-  return <a className='confirmbutton' onClick={() => { confirmOrder(props.cartitems) }}>Confirm Order</a>;
+  return <a className='confirmbutton' href='#0' onClick={() => { confirmOrder(props.cartitems) }}>Confirm Order</a>;
 };
+*/
 
-const Cart = props => {
-  const cartitems = props.cartitems;
-  const cartlistitems = [];
-  let i = 0;
-  for (const cartitemid in cartitems) {
-    const cartitem = cartitems[cartitemid];
-    cartlistitems.push((
-      <li key={i}>
-        <CartItem
-          productdata={cartitem.productdata}
-          quantity={cartitem.quantity}
-          removeFromCart={props.removeFromCart}
-          incrementQuantity={props.incrementQuantity}
-        />
-      </li>
-    ));
-    i++;
+class Cart extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { cartlistitems: [], showbilling: false };
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (JSON.stringify(nextProps.cartitems) !== JSON.stringify(this.props.cartitems)) {
+      const cartitems = nextProps.cartitems;
+      const cartlistitems = [];
+      let i = 0;
+      for (const cartitemid in cartitems) {
+        const cartitem = cartitems[cartitemid];
+        cartlistitems.push(
+          <li key={i}>
+            <CartItem
+              productdata={cartitem.productdata}
+              quantity={cartitem.quantity}
+              removeFromCart={nextProps.removeFromCart}
+              incrementQuantity={nextProps.incrementQuantity}
+            />
+          </li>
+        );
+        i++;
+      }
+      this.setState({ cartlistitems });
+    }
+
+    if (!nextProps.showcheckout && this.props.showcheckout) {
+      this.setState({ showbilling: false });
+    }
   }
-  return (
-    <div className={props.className}>
-      <ul>{cartlistitems}</ul>
-      {(() => {
-        if (props.showcheckout) {
-          return <ConfirmOrderButton cartitems={cartitems} />
-        } else if (cartlistitems.length > 0) {
-          return <a className='checkoutbutton' onClick={props.toggleCheckout}>Checkout</a>;
-        }
-      })()}
-    </div>
-  );
+  
+  render() {
+    return (
+      <div className={this.props.className}>
+        <ul className='cartlist'>{this.state.cartlistitems}</ul>
+        {(() => {
+          if (this.props.showcheckout && !this.state.showbilling) {
+          return <a className='showbillingbutton' href='#0' onClick={() => this.setState({ showbilling: true })}>Continue to Billing and Shipping</a>;
+          } else if (this.props.showcheckout && this.state.showbilling) {
+            return <BillingShippingForm />;
+          } else if (this.state.cartlistitems.length > 0) {
+            return <a className='checkoutbutton' href='#0' onClick={this.props.toggleCheckout}>Checkout</a>;
+          }
+        })()}
+      </div>
+    );
+  };
 }
 export default Cart;
